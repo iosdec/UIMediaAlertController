@@ -12,5 +12,6 @@
 @interface UIViewController (UIImageAlertController) <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (void)presentImageAlertController;
+- (void)addUIImageAlertControllerDelegate:(SEL)selector;
 
 @end
