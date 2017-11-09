@@ -75,6 +75,7 @@ UIImage *pickedImage;
     
     UIAlertAction *removeImage      =   [UIAlertAction actionWithTitle:@"Remove Image" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         pickedImage                 =   nil;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUIIACImageReset object:nil];
         [self presentImageAlertController];
     }];
     
