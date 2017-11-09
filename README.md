@@ -24,22 +24,33 @@ UIImageAlertController must be used inside a UIViewController class. For an exam
 
 ***[self presentImageAlertController]*** will present the image alert controller.
 
-There is also a notification handler you can use to handle your picked image which is demonstrated below.
+There is also a notification handler you can use to handle your picked image and also for when the image has been reset which are demonstrated below.
+
+Of course, you can also add your own custom NSNotificationCenter handlers without having to comply with the UIViewController extension class. Definitions for the notification keys are located in the header file.
 
 	- (void)viewDidLoad {
 	
 		//	Present Image Alert Controller
 		[self presentImageAlertController];
 		
-		//	Add Notification Handler:
-		[self addUIImageAlertControllerDelegate:@selector(customMethodImagePicked:)];
+		//	Add Picked Handler:
+		[self addUIImageAlertControllerDelegate:@selector(customImagePicked:)];
+		
+		//	Add Reset Handler:
+		[self addUIImageAlertControllerDelegate:@selector(customImageReset:)];
 	
 	}
 	
-	- (void)customMethodImagePicked:(NSNotification *)notification {
+	- (void)customImagePicked:(NSNotification *)notification {
 	
 		UIImage *image = (UIImage *)notification.object;
 		//	do something with image.
+		
+	}
+	
+	- (void)customImageReset:(NSNotification *)notification {
+		
+		//	image has been reset. clear image
 		
 	}
 
