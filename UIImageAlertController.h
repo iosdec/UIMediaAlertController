@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+#define kUIIACImagePicked               @"kUIIACImagePicked"
+#define kUIIACImageReset                @"kUIIACImageReset"
+
 @interface UIViewController (UIImageAlertController) <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (void)presentImageAlertController;
