@@ -2,7 +2,7 @@
 
 UIViewController extension class (Objective-C) for picking / displaying images from the Photo Library (UIImagePickerController).
 
-![UIImageAlertController](image1.pngraw=true "UIImageAlertController | Declan Land")
+![Screenshot](image1.png)
 
 ------------
 
