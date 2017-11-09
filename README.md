@@ -1,10 +1,10 @@
-##UIImageAlertController
+#UIImageAlertController
 
 UIViewController extension class (Objective-C) for picking / displaying images from the Photo Library (UIImagePickerController).
 
 ------------
 
-####Installation
+##Installation
 
 Click the green "Clone or download" button near the top right of this page, this will download this repositary as a zip file.
 
@@ -16,7 +16,7 @@ Import the ***UIImageAlertController.h*** header file into your project like so:
 
 ------------
 
-####Usage
+##Usage
 
 UIImageAlertController must be used inside a UIViewController class. For an example, let's use it inside the ***viewDidLoad*** method.
 
@@ -43,7 +43,7 @@ There is also a notification handler you can use to handle your picked image whi
 
 ------------
 
-####Custom image size
+##Custom image size
 
 To customise the image width / height, there are definitions at the top of the ***UIImageAlertController.m*** file:
 
@@ -52,6 +52,6 @@ To customise the image width / height, there are definitions at the top of the *
 
 ------------
 
-####Credits
+##Credits
 
 Created by Declan Land @iosdec - 2017 | Twitter: https://twitter.com/declanland
