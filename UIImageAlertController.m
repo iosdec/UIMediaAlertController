@@ -115,6 +115,7 @@ UIImage *pickedImage;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *chosenImage        =   info[UIImagePickerControllerEditedImage];
     pickedImage                 =   chosenImage;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUIIACImagePicked object:pickedImage];
     [picker dismissViewControllerAnimated:YES completion:^{
         [self presentImageAlertController];
     }];
