@@ -8,7 +8,6 @@
 
 #import "UIImageAlertController.h"
 
-#define kUIIACImagePicked               @"kUIIACImagePicked"
 #define kUIIACImageWidth                250
 #define kUIIACImageHeight               230
 #define kLineSpaceHeight                16.5
