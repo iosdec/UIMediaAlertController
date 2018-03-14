@@ -67,12 +67,15 @@ Use **MediaTypeVideo** to pick a video<br>
 
 - (void)showMediaController {
 	
-    self.mediaPicker = [[UIMediaAlertController alloc] initWithRoot:self];
-    [self.mediaPicker presentMediaAlertWithType:MediaTypeImage picked:^(UIMedia *media) {
+	if (!self.mediaPicker) {
+		self.mediaPicker = [[UIMediaAlertController alloc] initWithRoot:self];
+	}
+    
+	[self.mediaPicker presentMediaAlertWithType:MediaTypeImage picked:^(UIMedia *media) {
 		//	do something with media.image
-    } removed:^(UIMedia *media) {
+	} removed:^(UIMedia *media) {
 		//	user removed image
-    }];
+	}];
 	
 }
 ```
