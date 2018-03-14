@@ -42,38 +42,9 @@ typedef void (^pickerRemoved)(UIMedia *media);
 @property (strong, nonatomic)   NSString            *message;
 @property (strong, nonatomic)   UIImageView         *imageView;
 @property (strong, nonatomic)   UIView              *videoView;
+@property (strong, nonatomic)   AVPlayer            *playerRef;
 
 - (id)initWithRoot:(id)root;
 - (void)presentMediaAlertWithType:(MediaType)type picked:(void(^)(UIMedia *media))picked removed:(void(^)(UIMedia *media))removed;
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
