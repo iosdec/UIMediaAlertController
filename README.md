@@ -1,70 +1,78 @@
-## UIImageAlertController
+# UIMediaAlertController
 
-UIViewController extension class (Objective-C) for picking / displaying images from the Photo Library (UIImagePickerController).
+UIAlertController extension for selecting images / videos.<br>
+Written in *Objective-C*.
+
+*Created By: [Declan Land](https://twitter.com/declanland)*
+
+**Features**<br>
+*	Completion handlers<br>
+*	Ease of use<br>
+*	Media Preview<br>
+*	Customisable<br>
 
 ![Screenshot](image1.png)
 
-------------
+---
 
-#### Installation
+### Installation
 
-Click the green "Clone or download" button near the top right of this page, this will download this repositary as a zip file.
+Download the contents of this repo and add these files to your project:<br>
+```
+UIMediaAlertController.h
+UIMediaAlertController.m
+UIMedia.h
+UIMedia.m
+```
+Include these frameworks in your project:
+```objc
+#import <AVFoundation/AVFoundation.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <ImageIO/ImageIO.h>
+```
+---
 
-Drag both the ***UIImageAlertController.h*** and the ***UIImageAlertController.m*** files into your Xcode Project.
+### Usage (.h)
 
-Import the ***UIImageAlertController.h*** header file into your project like so:
+Import the *UIMediaAlertController.h* file into your project.<br>
+You must store the UIMediaAlertController as a property in your header class like so:
+```objc
+//		MyViewController.h
 
-	#import "UIImageAlertController.h"
+#import "UIMediaAlertController.h"
 
-------------
+@implementation MyViewController : UIViewController
 
-#### Usage
+@property (strong, nonatomic) UIMediaAlertController *mediaPicker;
 
-UIImageAlertController must be used inside a UIViewController class. For an example, let's use it inside the ***viewDidLoad*** method.
+@end
+```
 
-***[self presentImageAlertController]*** will present the image alert controller.
+### Usage (.m)
 
-There is also a notification handler you can use to handle your picked image and also for when the image has been reset which are demonstrated below.
+UIMediaAlertController can be used from any class. If the *root* object is not a UIViewController, UIMediaAlertController will loop through responders and find the controller.<br>
 
-Of course, you can also add your own custom NSNotificationCenter handlers without having to comply with the UIViewController extension class. Definitions for the notification keys are located in the header file.
+Use **MediaTypeImage** to pick an image<br>
+Use **MediaTypeVideo** to pick a video<br>
 
-	- (void)viewDidLoad {
+```objc
+@implementation MyViewController
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+    [self showMediaController];
+}
+
+#pragma mark	-	Show Controller:
+
+- (void)showMediaController {
 	
-		//	Present Image Alert Controller
-		[self presentImageAlertController];
-		
-		//	Add Picked Handler:
-		[self addUIImageAlertControllerDelegate:@selector(customImagePicked:)];
-		
-		//	Add Reset Handler:
-		[self addUIImageAlertControllerDelegate:@selector(customImageReset:)];
+    self.mediaPicker = [[UIMediaAlertController alloc] initWithRoot:self];
+    [self.mediaPicker presentMediaAlertWithType:MediaTypeImage picked:^(UIMedia *media) {
+		//	do something with media.image
+    } removed:^(UIMedia *media) {
+		//	user removed image
+    }];
 	
-	}
-	
-	- (void)customImagePicked:(NSNotification *)notification {
-	
-		UIImage *image = (UIImage *)notification.object;
-		//	do something with image.
-		
-	}
-	
-	- (void)customImageReset:(NSNotification *)notification {
-		
-		//	image has been reset. clear image
-		
-	}
-
-------------
-
-#### Custom image size
-
-To customise the image width / height, there are definitions at the top of the ***UIImageAlertController.m*** file:
-
-	#define kUIIACImageWidth                250
-	#define kUIIACImageHeight               230
-
-------------
-
-##Credits
-
-Created by Declan Land @iosdec - 2017 | Twitter: https://twitter.com/declanland
+}
+```
