@@ -27,6 +27,9 @@
     [self setPickerRemoved:removed];
     [self setController:nil];
     
+    //  remove objects:
+    [self removeObjects];
+    
     //  find root controller:
     UIViewController *controller    =   [self controllerWithRoot:self.root];
     if (!controller) { return; }
@@ -38,6 +41,18 @@
     //  show alert controller:
     [self showAlertController];
     
+}
+
+- (void)removeObjects {
+    if (self.imageView) {
+        [self.imageView removeFromSuperview];
+        self.imageView = nil;
+    } if (self.videoView) {
+        [self.videoView removeFromSuperview];
+        self.videoView = nil;
+    } if (self.playerRef) {
+        self.playerRef = nil;
+    }
 }
 
 #pragma mark    -   Show Alert Controller:
@@ -92,10 +107,10 @@
         
         AVPlayer *player                    =   [[AVPlayer alloc] init];
         if (self.media.videoURL) { player   =   [[AVPlayer alloc] initWithURL:self.media.videoURL]; }
-        
         AVPlayerLayer *layer                =   [AVPlayerLayer playerLayerWithPlayer:player];
         layer.frame                         =   CGRectMake(0, 0, self.videoView.frame.size.width, self.videoView.frame.size.height);
         [self.videoView.layer insertSublayer:layer atIndex:0];
+        self.playerRef                      =   player;
         
     }
     
@@ -182,7 +197,13 @@
     }
     
     //  present alert controller:
-    [self.controller presentViewController:ac animated:YES completion:nil];
+    [self.controller presentViewController:ac animated:YES completion:^{
+        if (self.media.videoURL) {
+            if (self.playerRef) {
+                [self.playerRef play];
+            }
+        }
+    }];
     
 }
 
@@ -260,17 +281,3 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
