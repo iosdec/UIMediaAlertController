@@ -60,7 +60,7 @@ Use **MediaTypeVideo** to pick a video<br>
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    [self showMediaController];
+	[self showMediaController];
 }
 
 #pragma mark	-	Show Controller:
