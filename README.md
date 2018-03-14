@@ -11,7 +11,7 @@ Written in *Objective-C*.
 *	Media Preview<br>
 *	Customisable<br>
 
-![Screenshot](image1.png)
+![Screenshot](uimac.png)
 
 ---
 
