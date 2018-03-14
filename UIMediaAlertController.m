@@ -185,7 +185,12 @@
         }
     }
     
-    UIAlertAction *cancel           =   [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel           =   [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        if (self.playerRef) {
+            [self.playerRef seekToTime:CMTimeMake(0, 1)];
+            [self.playerRef pause];
+        }
+    }];
     [ac addAction:cancel];
     
     //  add popover for iPad
