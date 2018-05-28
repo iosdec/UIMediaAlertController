@@ -46,6 +46,7 @@ typedef void (^mediaRemoved)(void);
 + (void)presentWithType:(MediaType)type picked:(void(^)(void))picked;
 + (void)presentWithType:(MediaType)type picked:(void (^)(void))picked removed:(void(^)(void))removed;
 + (void)resetMedia;
++ (UIMedia *)media;
 - (void)presentWithType:(MediaType)type picked:(void(^)(void))picked;
 - (void)presentWithType:(MediaType)type picked:(void(^)(void))picked removed:(void(^)(void))removed;
 - (void)resetMedia;
