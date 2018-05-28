@@ -52,6 +52,11 @@ __strong UIMedia *sharedMedia;
     sharedMedia.videoThumb  =   nil;
 }
 
++ (UIMedia *)media {
+    if (sharedMedia) { return sharedMedia; }
+    else { sharedMedia = [[UIMedia alloc] init]; return sharedMedia; }
+}
+
 - (void)presentWithType:(MediaType)type picked:(void (^)(void))picked {
     [sharedController setController:[self findTopViewController]];
     [self setType:type];
