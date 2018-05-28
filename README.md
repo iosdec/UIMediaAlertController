@@ -32,50 +32,64 @@ Include these frameworks in your project:
 ```
 ---
 
-### Usage (.h)
+### Usage
 
-Import the *UIMediaAlertController.h* file into your project.<br>
-You must store the UIMediaAlertController as a property in your header class like so:
+First, import the *UIMediaAlertController.h* file into the place you want to
+use it:
 ```objc
-//		MyViewController.h
+#import "UIMediaAlertController.h"
+```
+
+There are 2 methods of using the UIMediaAlertController:
+   -   Shared Instance
+   -   Stored Property
+
+The benefits of using the shared instance is that it's really simple to call,
+and that the same UIMedia object is used throughout the app - unless you call:
+[UIMediaAlertController resetMedia];
+For example:
+
+```objc
+[UIMediaAlertController presentWithType:MediaTypeImage picked:^{
+   // Retreive global media by using:
+   UIMedia *media = [UIMediaAlertController media];
+   // Reset global media:
+   [UIMediaAlertController resetMedia];
+}];
+```
+
+The other method, is storing the UIMediaAlertController property in your
+header file *MyViewController.h* like so:
+
+```objc
+//	MyViewController.h
 
 #import "UIMediaAlertController.h"
 
 @implementation MyViewController : UIViewController
 
-@property (strong, nonatomic) UIMediaAlertController *mediaPicker;
+@property (strong, nonatomic) UIMediaAlertController *uimac;
 
 @end
+
 ```
 
-### Usage (.m)
-
-UIMediaAlertController can be used from any class. If the *root* object is not a UIViewController, UIMediaAlertController will loop through responders and find the controller.<br>
-
-Use **MediaTypeImage** to pick an image<br>
-Use **MediaTypeVideo** to pick a video<br>
+*MyViewController.m*":
 
 ```objc
+
 @implementation MyViewController
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
-	[self showMediaController];
+- (IBAction)chooseImageButtonClicked:(UIButton *)sender {
+   self.uimac = [[UIMediaAlertController alloc] init];
+   [self.uimac presentWithType:MediaTypeImage picked:^{
+	// get media:
+	UIMedia *media = self.uimac.media;
+	// resent media:
+	[self.uimac resetMedia];
+   }];
 }
 
-#pragma mark	-	Show Controller:
+@end
 
-- (void)showMediaController {
-	
-	if (!self.mediaPicker) {
-		self.mediaPicker = [[UIMediaAlertController alloc] initWithRoot:self];
-	}
-    
-	[self.mediaPicker presentMediaAlertWithType:MediaTypeImage picked:^(UIMedia *media) {
-		//	do something with media.image
-	} removed:^(UIMedia *media) {
-		//	user removed image
-	}];
-	
-}
 ```
