@@ -27,6 +27,7 @@ __strong UIMedia *sharedMedia;
     if (!sharedController.media) {
         sharedController.media = sharedMedia;
     }
+    [sharedController showAlertController_pre:sharedController];
 }
 
 + (void)presentWithType:(MediaType)type picked:(void (^)(void))picked removed:(void (^)(void))removed {
@@ -43,6 +44,7 @@ __strong UIMedia *sharedMedia;
     if (!sharedController.media) {
         sharedController.media = sharedMedia;
     }
+    [sharedController showAlertController_pre:sharedController];
 }
 
 + (void)resetMedia {
@@ -58,7 +60,7 @@ __strong UIMedia *sharedMedia;
 }
 
 - (void)presentWithType:(MediaType)type picked:(void (^)(void))picked {
-    [sharedController setController:[self findTopViewController]];
+    [self setController:[self findTopViewController]];
     [self setType:type];
     [self setPicked:picked];
     [self setRemoved:nil];
@@ -66,10 +68,11 @@ __strong UIMedia *sharedMedia;
     if (!self.media) {
         self.media = [[UIMedia alloc] init];
     }
+    [self showAlertController_pre:self];
 }
 
 - (void)presentWithType:(MediaType)type picked:(void (^)(void))picked removed:(void (^)(void))removed {
-    [sharedController setController:[self findTopViewController]];
+    [self setController:[self findTopViewController]];
     [self setType:type];
     [self setPicked:picked];
     [self setRemoved:removed];
@@ -77,6 +80,7 @@ __strong UIMedia *sharedMedia;
     if (!self.media) {
         self.media = [[UIMedia alloc] init];
     }
+    [self showAlertController_pre:self];
 }
 
 - (void)resetMedia {
@@ -87,6 +91,15 @@ __strong UIMedia *sharedMedia;
 }
 
 #pragma mark    -   Present Preperation:
+
+- (void)showAlertController_pre:(UIMediaAlertController *)instance {
+    if (self.delay) {
+        [instance performSelector:@selector(showAlertController) withObject:nil afterDelay:self.delay];
+        return;
+    } else {
+        [self showAlertController];
+    }
+}
 
 - (void)showAlertController {
     
