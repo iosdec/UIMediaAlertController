@@ -40,6 +40,7 @@ typedef void (^mediaRemoved)(void);
 @property (strong, nonatomic)   UIImageView *imageView;
 @property (strong, nonatomic)   UIView *videoView;
 @property (strong, nonatomic)   AVPlayer *playerRef;
+@property (nonatomic, assign)   NSUInteger delay;
 
 //  Presentation Options:
 
